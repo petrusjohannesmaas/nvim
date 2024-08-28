@@ -1,11 +1,19 @@
 return {
-	"nyoom-engineering/oxocarbon.nvim",
+	"uloco/bluloco.nvim",
+	version = false,
 	lazy = false,
-	priority = 1000, 
+	priority = 1000, -- make sure to load this before all the other start plugins
+	dependencies = { "rktjmp/lush.nvim" },
 	config = function()
-		vim.opt.background = "dark"
-        vim.cmd.colorscheme "oxocarbon"
-        vim.api.nvim_set_hl(0, "Normal", { bg = "none" })
-        vim.api.nvim_set_hl(0, "NormalFloat", { bg = "none" })
-	end
+		require("bluloco").setup({
+			style = "auto", -- "auto" | "dark" | "light"
+			transparent = false,
+			italics = false,
+			terminal = vim.fn.has("gui_running") == 1,
+			guicursor = true,
+		})
+
+		vim.opt.termguicolors = true
+		vim.cmd("colorscheme bluloco-dark")
+	end,
 }
